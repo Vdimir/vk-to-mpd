@@ -1,7 +1,13 @@
 from WallPostModel import WallPostModel
 import vk
 
-token = "df5761648d0e1e94e61255212f0022a20b6fa013b21b909aefebf654e98a6358056fb1608fc837b662c04"
+def get_acces_token_from_file():
+    fin = open("access_token")
+    token = fin.read()
+    fin.close()
+    return token
+
+token = get_acces_token_from_file()
 vkapi = vk.API(access_token=token, timeout=5)
 
 

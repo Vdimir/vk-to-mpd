@@ -14,10 +14,11 @@ def get_login_url():
     print(result)
     exit(1)
 
+get_login_url()
 
-def longpoll_test():
-    lp_data = vkapi.messages.getLongPollServer()
-    lp = LongPollManager(lp_data)
-    updates = lp.connect()
-    for upd in updates:
-        print(upd[0])
+#def longpoll_test():
+#    lp_data = vkapi.messages.getLongPollServer()
+#    lp = LongPollManager(lp_data)
+#    updates = lp.connect()
+#   for upd in updates:
+#        print(upd[0])
