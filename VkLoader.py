@@ -1,8 +1,10 @@
 from WallPostModel import WallPostModel
 import vk
+import os
 
 def get_acces_token_from_file():
-    fin = open("access_token")
+    ac_file = "{dir}/{fname}".format(dir=os.path.dirname(os.path.abspath(__file__)), fname="access_token")
+    fin = open(ac_file)
     token = fin.read()
     fin.close()
     return token
