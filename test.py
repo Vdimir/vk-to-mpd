@@ -1,4 +1,3 @@
-from MainController import ChooseAndPlay
 from VkAudioPageLoader import VkFavePostLoader
 
 __author__ = 'deffe'

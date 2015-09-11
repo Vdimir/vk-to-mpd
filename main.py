@@ -1,5 +1,5 @@
 #!/usr/bin/python
-from MainController import ChooseAndPlay
+from ChooseAndPlay import ChooseAndPlay
 
 if __name__ == '__main__':
     main_controller = ChooseAndPlay()

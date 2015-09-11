@@ -1,5 +1,5 @@
 from curses import KEY_LEFT, KEY_RIGHT, KEY_UP, KEY_DOWN
-from AudioManager import MpdAudioPlayer
+from AudioPlayer import MpdAudioPlayer
 from VkAudioPageLoader import VkFavePostLoader, VkMyAudiosLoader, VkMyWallPostLoader
 from GUI import WallPostView
 
@@ -11,7 +11,7 @@ class ChooseAndPlay:
         self.audio_player = MpdAudioPlayer()
 
         self.page_loaders = cycle([
-            VkMyAudiosLoader(),
+            VkFavePostLoader(),
             VkMyAudiosLoader(),
             # VkMyWallPostLoader()
         ])
