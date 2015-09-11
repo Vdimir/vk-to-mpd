@@ -13,10 +13,16 @@ class WallPostView:
 
     def display(self, wall_post):
         self.myscreen.clear()
-        self.myscreen.addstr(" {title}\n".format(title=wall_post.get_title()),
+        self.myscreen.addstr(" {title}\n"
+                             .format(title=wall_post['text'][:150].replace("\n", " ")
+                                     .encode('utf_8')),
                              curses.A_BOLD)
-        for ind, item in enumerate(wall_post.get_playlist(), start=1):
-            self.myscreen.addstr("[{i}] {text}\n".format(i=ind, text=item))
+        for ind, item in enumerate(wall_post['audios'], start=1):
+            self.myscreen.addstr(u"[{i}] {artist} - {title}\n"
+                                 .format(i=ind,
+                                         title=item['title'],
+                                         artist=item['artist'])
+                                 .encode('utf_8'))
 
         self.myscreen.refresh()
         return self.myscreen.getch()

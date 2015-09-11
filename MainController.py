@@ -1,43 +1,43 @@
-
-from curses import KEY_LEFT, KEY_RIGHT
-import subprocess
-from AudioManager import AudioPlayer
-from VkLoader import VkPostLoader
+from curses import KEY_LEFT, KEY_RIGHT, KEY_UP, KEY_DOWN
+from AudioManager import MpdAudioPlayer
+from VkAudioPageLoader import VkFavePostLoader, VkMyAudiosLoader
 from GUI import WallPostView
 
 
 class ChooseAndPlay:
     def __init__(self):
-        self.audio_player = AudioPlayer()
-        self.gui = WallPostView()
-        self.fave_posts_loader = VkPostLoader()
-        self.current_page = 0
+        self.audio_player = MpdAudioPlayer()
+        self.fave_page_loader = VkFavePostLoader()
+        self.myaudio_page_loader = VkMyAudiosLoader()
 
-    def loop(self):
+        self.page_loader = self.fave_page_loader
+
+    def print_page(self):
+        print self.page_loader.current_page['text']
+        for a in self.page_loader.current_page['audios']:
+            print(a)
+
+    def show_pages(self):
+        gui = WallPostView()
         bye = 0
-        stastusbar_text = ""
         while not bye:
-            page_to_display = self.fave_posts_loader.get_page(self.current_page)
-            button_pressed = self.gui.display(page_to_display)
+            page_to_display = self.page_loader.current_page
+            button_pressed = gui.display(page_to_display)
+            if button_pressed == KEY_UP:
+                self.page_loader = self.fave_page_loader
+            if button_pressed == KEY_DOWN:
+                self.page_loader = self.myaudio_page_loader
             if button_pressed == KEY_LEFT:
-                self.dec_cur_page()
+                self.page_loader.go_to_prev_page()
             if button_pressed == KEY_RIGHT:
-                self.inc_cur_page()
+                self.page_loader.go_to_next_page()
             if button_pressed == ord('q'):
                 break
-            if button_pressed == ord('Q'):
-                break
             if button_pressed == ord('p'):
-                self.audio_player.add_audio(page_to_display.get_audios())
+                self.audio_player.add_audio(page_to_display['audios'])
                 self.audio_player.play()
+        gui.close()
+        self._exit()
 
-    def inc_cur_page(self):
-            self.current_page += 1
-
-    def dec_cur_page(self):
-            self.current_page = max(0, self.current_page-1)
-
-    def exit(self):
-        self.gui.close()
+    def _exit(self):
         self.audio_player.close()
-        subprocess.call(["ncmpc"])
