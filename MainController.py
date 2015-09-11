@@ -36,6 +36,8 @@ class ChooseAndPlay:
             if button_pressed == ord('p'):
                 self.audio_player.add_audio(page_to_display['audios'])
                 self.audio_player.play()
+            if button_pressed == ord('a'):
+                self.audio_player.add_audio(page_to_display['audios'], clear=False)
         gui.close()
         self._exit()
 
