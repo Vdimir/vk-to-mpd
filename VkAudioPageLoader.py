@@ -66,6 +66,28 @@ class VkFavePostLoader(VkAudioPageLoader):
         self._current_loaded_page += 1
 
 
+class VkMyWallPostLoader(VkAudioPageLoader):
+    def __init__(self):
+        VkAudioPageLoader.__init__(self)
+
+    def _load_more(self):
+        vk_fave_posts = vkapi.wall.get(count=self._load_pages_by,
+                                       offset=self._current_loaded_page * self._load_pages_by,
+                                       filter='all')
+        for t in vk_fave_posts['items']:
+            vk_wall_post_copy_hist = t.get('copy_history')
+            if vk_wall_post_copy_hist is None:
+                continue
+            vk_wall_post = vk_wall_post_copy_hist[0]
+            wp = {
+                'text': vk_wall_post['text'],
+                'audios': pull_audio_from_wall_post(vk_wall_post)
+            }
+            if wp['audios']:
+                self._pages.append(wp)
+        self._current_loaded_page += 1
+
+
 class VkMyAudiosLoader(VkAudioPageLoader):
     def __init__(self):
         VkAudioPageLoader.__init__(self)
