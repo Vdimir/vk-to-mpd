@@ -1,4 +1,5 @@
 from curses import KEY_LEFT, KEY_RIGHT, KEY_UP, KEY_DOWN
+from AudioDownload import download_audiolist
 from AudioPlayer import MpdAudioPlayer
 from VkAudioPageLoader import VkFavePostLoader, VkMyAudiosLoader, VkMyWallPostLoader
 from GUI import WallPostView
@@ -43,9 +44,18 @@ class ChooseAndPlay:
                 self.audio_player.add_audio(page_to_display['audios'])
                 self.audio_player.play()
             if button_pressed == ord('a'):
-                self.audio_player.add_audio(page_to_display['audios'], clear=False)
+                self.audio_player.add_audio(page_to_display['audios'], need_clear=False)
+            if button_pressed == ord('d'):
+                download_audiolist(
+                    page_to_display['audios'], page_to_display['text'])
+                # break
+
         gui.close()
         self._exit()
+
+    # def dload_first(self):
+    #     page_to_display = self.current_page_loader.current_page
+    #     get_script_download_audiolist(page_to_display['audios'], page_to_display['text'])
 
     def _exit(self):
         self.audio_player.close()

@@ -13,13 +13,13 @@ class VkFavePostLoaderTestCase(unittest.TestCase):
         self.fave_posts.go_to_prev_page()
         self.fave_posts.go_to_prev_page()
         self.assertEqual(self.fave_posts.current_page['audios'][3]['artist'],
-                         'Electric Wizard')
+                         'The Dead Weather')
 
     def test_few_next(self):
         for i in range(16):
             self.fave_posts.go_to_next_page()
         self.assertEqual(self.fave_posts.current_page['audios'][0]['artist'],
-                         'Whiplash')
+                         'Marmozets')
 
 
 if __name__ == '__main__':
