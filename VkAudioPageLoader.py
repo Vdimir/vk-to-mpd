@@ -2,6 +2,7 @@ import vk
 import os
 
 
+
 def pull_audio_from_wall_post(vk_wall_post):
     att_list = vk_wall_post.get('attachments')
     audio_list = []
@@ -13,7 +14,7 @@ def pull_audio_from_wall_post(vk_wall_post):
     return audio_list
 
 
-def get_access_token_from_file():
+def load_access_token_from_file():
     file_path = "{dir}/{fname}".format(dir=os.path.dirname(os.path.abspath(__file__)),
                                        fname="access_token")
     fin = open(file_path)
@@ -22,7 +23,7 @@ def get_access_token_from_file():
     return text_data
 
 
-token = get_access_token_from_file()
+token = load_access_token_from_file()
 vkapi = vk.API(access_token=token, timeout=5)
 
 

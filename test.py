@@ -19,7 +19,7 @@ class VkFavePostLoaderTestCase(unittest.TestCase):
         for i in range(16):
             self.fave_posts.go_to_next_page()
         self.assertEqual(self.fave_posts.current_page['audios'][0]['artist'],
-                         'Marmozets')
+                         'Contra')
 
 
 if __name__ == '__main__':

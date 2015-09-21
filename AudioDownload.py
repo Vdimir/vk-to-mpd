@@ -58,3 +58,4 @@ def get_save_path(title_text):
     # audio_path = '/home/deffe/MyDoc/Music/'
     # audio_path = './foo/'
     return '/home/deffe/MyDoc/Music/' + audio_path
+    # return '/home/deffe/.mpd/music/' + audio_path

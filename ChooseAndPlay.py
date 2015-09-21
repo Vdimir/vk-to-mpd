@@ -48,14 +48,11 @@ class ChooseAndPlay:
             if button_pressed == ord('d'):
                 download_audiolist(
                     page_to_display['audios'], page_to_display['text'])
-                # break
+                gui.display_text('Download Completed')
+                break
 
         gui.close()
         self._exit()
-
-    # def dload_first(self):
-    #     page_to_display = self.current_page_loader.current_page
-    #     get_script_download_audiolist(page_to_display['audios'], page_to_display['text'])
 
     def _exit(self):
         self.audio_player.close()
