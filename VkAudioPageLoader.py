@@ -20,7 +20,7 @@ def load_access_token_from_file():
     fin = open(file_path)
     text_data = fin.read()
     fin.close()
-    return text_data
+    return text_data.strip()
 
 
 token = load_access_token_from_file()
